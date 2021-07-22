@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insertar configuraciones</title>
+
+
+</head>
+
+<body class="container mt-5">
+
+    <div class="card shadow pt-3 me-auto ms-auto border-white" style="max-width: 700px;">
+        <div class="card-body">
+            <form [formGroup]="configuracionesForm " (ngSubmit)="guardar(this.configuracionesForm.value)" focusedRow>
+
+
+
+                <div class="text-center mb-4">
+                    <!-- *ngIf="!IdProveedor" 
+                    *ngIf="IdProveedor" -->
+                    <h3 class=" text-black-50 fw-bold fst-italic">REGISTRO DE CONFIGURACIONES</h3>
+                    <!-- <h3  class=" text-black-50 fw-bold fst-italic">EDITAR configuraciones</h3> -->
+
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                <div class="form-group mb-3 ">
+
+
+
+                    <div class="row ">
+                        <div class="col-sm  col-sm-4">
+                            <label for="exampleInputEmail1" class=" text-black-50 fw-bold fst-italic">
+                                Identificador</label>
+                            <input formControlName="identificador"
+                                [class.is-invalid]="configuracionesForm.get('identificador')!.touched && configuracionesForm.get('identificador')?.invalid"
+                                [class.border-primary]="configuracionesForm.get('identificador')!.touched && configuracionesForm.get('identificador')?.valid"
+                                type="email" class="form-control    " aria-describedby="emailHelp"
+                                placeholder="Ingrese Identificador">
+                        </div>
+
+
+                        <div class="col-sm col-sm-4  ">
+                            <label for="exampleInputEmail1" class=" text-black-50 fw-bold fst-italic">Ruc</label>
+                            <input formControlName="ruc" type="email"
+                                [class.is-invalid]="configuracionesForm.get('ruc')!.touched && configuracionesForm.get('ruc')?.invalid"
+                                [class.border-primary]="configuracionesForm.get('ruc')!.touched && configuracionesForm.get('ruc')?.valid"
+                                class="form-control     " aria-describedby="emailHelp" placeholder="Ingrese Ruc">
+                        </div>
+
+
+
+
+                        <div class="col-sm col-sm-4 ">
+                            <label for="exampleInputEmail1"
+                                class=" text-black-50 fw-bold fst-italic">Propietario</label>
+                            <input formControlName="propietario" type="email"
+                                [class.is-invalid]="configuracionesForm.get('propietario')!.touched && configuracionesForm.get('propietario')?.invalid"
+                                [class.border-primary]="configuracionesForm.get('propietario')!.touched && configuracionesForm.get('propietario')?.valid"
+                                class="form-control     " aria-describedby="emailHelp"
+                                placeholder="Ingrese Propietario">
+                        </div>
+
+
+
+
+                    </div>
+
+
+
+                    <div class="row mt-4 ">
+                        <div class="col-sm  col-sm-4">
+                            <label for="exampleInputEmail1" class=" text-black-50 fw-bold fst-italic">
+                                Fecha Desde</label>
+                            <input formControlName="fechaSriDesde"
+                                [class.is-invalid]="configuracionesForm.get('fechaSriDesde')!.touched && configuracionesForm.get('fechaSriDesde')?.invalid"
+                                [class.border-primary]="configuracionesForm.get('fechaSriDesde')!.touched && configuracionesForm.get('fechaSriDesde')?.valid"
+                                type="date" class="form-control    " aria-describedby="emailHelp" placeholder=" Desde">
+                        </div>
+
+
+                        <div class="col-sm col-sm-4  ">
+                            <label for="exampleInputEmail1" class=" text-black-50 fw-bold fst-italic">Fecha
+                                Hasta</label>
+                            <input formControlName="fechaSriHasta" type="date"
+                                [class.is-invalid]="configuracionesForm.get('fechaSriHasta')!.touched && configuracionesForm.get('fechaSriHasta')?.invalid"
+                                [class.border-primary]="configuracionesForm.get('fechaSriHasta')!.touched && configuracionesForm.get('fechaSriHasta')?.valid"
+                                class="form-control     " aria-describedby="emailHelp" placeholder="Hasta">
+                        </div>
+
+
+
+
+                        <div class="col-sm col-sm-4 ">
+                            <label for="exampleInputEmail1" class=" text-black-50 fw-bold fst-italic">Direccion</label>
+                            <input formControlName="direccion" type="email"
+                                [class.is-invalid]="configuracionesForm.get('direccion')!.touched && configuracionesForm.get('direccion')?.invalid"
+                                [class.border-primary]="configuracionesForm.get('direccion')!.touched && configuracionesForm.get('direccion')?.valid"
+                                class="form-control     " aria-describedby="emailHelp" placeholder="Ingrese Direccion">
+                        </div>
+
+
+
+
+                    </div>
+
+
+
+                    <div class="row mt-4 ">
+                        <div class="col-sm  col-sm-6">
+                            <label for="exampleInputEmail1" class=" text-black-50 fw-bold fst-italic">
+                                Autorización del SRI </label>
+                            <input formControlName="autorizacionSri"
+                                [class.is-invalid]="configuracionesForm.get('autorizacionSri')!.touched && configuracionesForm.get('autorizacionSri')?.invalid"
+                                [class.border-primary]="configuracionesForm.get('autorizacionSri')!.touched && configuracionesForm.get('autorizacionSri')?.valid"
+                                type="text" class="form-control    " aria-describedby="emailHelp" placeholder=" Autorizacion del SRI">
+                        </div>
+
+
+
+
+
+                        <div class="col-sm  col-sm" style="margin-top:2em; margin-left:3em">
+
+
+                            <input formControlName="activo" style="width: 1,5em; height: 1em;" type="checkbox" class="form-check-input" id="exampleCheck1">
+                            <label class="form-check-label ms-2" for="exampleCheck1">Estado de la Configuración</label>
+
+
+                        </div>
+
+
+
+
+
+                    </div>
+
+
+
+
+
+                </div>
+
+
+                <hr>
+
+
+                <div class="text-center">
+
+                    <button class="btn btn-primary col-sm-4 col-sm">Guardar</button>
+
+                    <button [routerLink]="[ '/menuPrincipal/listarConfiguraciones' ]"
+                        class="btn btn-secondary col-sm-4 col-sm  m-3">Cancelar</button>
+                </div>
+
+
+            </form>
+        </div>
+    </div>
+
+
+</body>
+
+</html>

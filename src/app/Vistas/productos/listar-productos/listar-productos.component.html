@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listar Empleados</title>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="text-uppercase text-center pt-3 pb-2 ">
+            <h3 style="font-weight: bold;"><i class="material-icons">assignment_turned_in</i>Productos</h3>
+        </div>
+    </div>
+
+    <div class="container-fluid  col-8  col-sm-6  col-lg-4  mt-3">
+        <div class="row">
+
+            <input  [(ngModel)]="busqueda" (keyup)="buscador($event)"  name="buscar" id="buscar" type="text" class="form-control " aria-describedby="emailHelp"
+                placeholder="Buscar Productos">
+
+        </div>
+
+
+    </div>
+    <div class="text-center mt-4 ">
+        <a class="btn btn-primary col-5 col-sm-3 "  [routerLink]="[ '/menuPrincipal/insertarProductos' ]"  >Nuevo</a>
+    
+    </div>
+
+    <div class="table-responsive mt-4    container" style="height: 505px;">
+        <table class="table table-bordered table-sm text-center">
+            <thead class="bg-dark text-white " >
+                <tr>
+                    <td>#</td>
+                    <td>Nombre</td>
+                    <td>Talla</td>
+                    <td>Descripcion</td>
+                    <td>$ Compra </td>
+                    <td>$ Unidad</td>
+                    <td>$ Docena</td>
+                    <td>$ Stock</td>
+                    <td>Proveedor</td>
+                    <td>Categoria</td>
+                    <td>Opciones</td>
+             
+
+                </tr>
+            </thead>
+            <tbody >
+                <tr *ngFor="let item of productosList; let i=index" class="text-dark webkit-scrollbar," class="text-dark">
+                    <td><strong>{{i+1}}</strong></td>
+                    <td>{{item.nombre}}</td>
+                    <td>{{item.talla}}</td>
+                    <td>{{item.descripcion}}</td>
+                    <td>{{item.precioCompra}}</td>
+                    <td>{{item.precioUnidad}}</td>
+                    <td>{{item.precioDocena}}</td>
+                    <td>{{item.stock}}</td>
+                    <td>{{item.proveedor.nombre}}</td>
+                    <td>{{item.categoria.nombre}}</td>
+                    
+                 
+            
+
+                    <td class="text-center">
+
+
+                        <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+
+
+
+                            <div class="btn-group" role="group">
+                                <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    Opciones
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                    <li><a class="dropdown-item"   [routerLink]="['/menuPrincipal/editarProductos/',item.idProducto]" >Editar</a></li>
+                                    <li><button   class="btn"  (click)="eliminar(item.idProducto)"  >Eliminar</button></li>
+                                </ul>
+                            </div>
+                        </div>
+
+
+                       
+                    </td>
+                </tr>
+
+                <tr><td *ngIf="productosList.length==0" class='text-center' colspan='11'>No existe Registro</td> </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+
+
+
+</html>

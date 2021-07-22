@@ -1,0 +1,366 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fatura Venta</title>
+    
+</head>
+
+
+    <div class="text-uppercase text-center pt-2  ">
+        <h3 style="font-weight: bold;"><i class="material-icons">receipt</i> Facturación de Compras</h3>
+    </div>
+
+
+<body>
+    <div id="contenedor" name="contenedor" class="table-responsive ps-2">
+
+
+        <div class="ms-auto me-auto col-sm mt-4" style="min-width: 700px; max-width: 700px;">
+
+
+            <div class="row">
+
+
+            
+
+
+                <div class="col-sm-5 m-1  col-sm me-auto ms-auto input-group-sm" style="max-width: 280px;">
+
+
+                    <ng-select [(ngModel)]="btnProveedor" (ngModelChange)="cargarProveedor($event)"
+                        placeholder="Seleccione Proveedor">
+                        <ng-option *ngFor="let item of proveedoresList " [value]="item.idProveedor">{{item.cedula}} {{item.nombre }} </ng-option>
+                    </ng-select>
+
+                </div>
+
+
+
+            </div>
+
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+        <div  class="card container-fluid mt-2 mb-2"
+            style="min-width: 700px; max-width: 700px; border: 1px solid  black ;">
+
+
+
+            <div class="card-header mb-2" style="border: none;border-bottom: 1px dotted rgb(185, 185, 185)">
+                <div class="row">
+
+                    <strong class="text-end"  style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">FACTURA N. <label style="font-weight: normal;" >{{numeroFactura}}</label> </strong>
+
+                </div>
+
+            </div>
+
+
+
+            <table style="font-size: 12px;">
+
+                <tr style="height: 20px;">
+                    <td style="width:10%;">
+                        <strong>Cedula:</strong>
+                    </td>
+                    <td style="width:13%;">
+                        {{objProveedor?.cedula}}
+                    </td>
+
+                    <td style="width:7%;">
+                        <strong>Cliente:</strong>
+                    </td>
+
+                    <td colspan="3" style="width:65%;">
+                        {{objProveedor?.nombre}} {{objProveedor?.apellido}}
+                    </td>
+                </tr>
+
+                <tr style="height: 20px;">
+                    <td>
+                        <strong>Direccion:</strong>
+                    </td>
+                    <td colspan="5">
+                        {{objProveedor?.direccion}}
+                    </td>
+
+
+
+
+                </tr>
+
+                <tr style="height: 20px;">
+
+
+                    <td>
+                        <strong>Fecha:</strong>
+                    </td>
+                    <td>
+                        {{fecha | date:'yyyy-MM-dd'}}
+                    </td>
+
+                    <td>
+                        <strong>Telefono:</strong>
+                    </td>
+                    <td style="width: 13%;">
+                        {{objProveedor?.celular}}
+                    </td>
+
+
+                    <td style="width: 6%;">
+                        <strong> Correo:</strong>
+                    </td>
+                    <td colspan="2">
+                        {{objProveedor?.correo}}
+                    </td>
+
+
+
+
+                </tr>
+
+
+
+
+
+            </table>
+
+
+
+            <hr style="border-bottom: 1px dotted rgb(185, 185, 185) ;">
+
+            <div class="row">
+
+
+
+                <div class="col-4">
+                    <label for="exampleInputEmail1" class=" text-black-50 fw-bold fst-italic"
+                        style="font-size: 14px;"></label>
+
+
+                    <ng-select id="btnProducto" name="btnProducto" (ngModelChange)=" cargarProducto($event)"
+                        [(ngModel)]="btnProducto" placeholder="Seleccione Producto">
+                        <ng-option *ngFor="let item of productosList" [value]="item.idProducto">{{item.nombre}}  {{item.talla}}
+                        </ng-option>
+                    </ng-select>
+
+                </div>
+                <!-- <div class="col-2" >
+                    <label for="exampleInputEmail1" class=" text-black-50 fw-bold fst-italic" style="font-size: 14px;" >Cantidad</label>
+
+                    <input [ngModel]="cantidad"   type="number"  aria-describedby="emailHelp"
+                        placeholder="" style="height: 36px; width:100px ; "  >
+
+                </div> -->
+                <!-- 
+                <div class="col-2">
+                    <label   for="exampleInputEmail1" class=" text-black-50 fw-bold fst-italic" style="font-size: 14px;">Precio</label>
+
+                    <input [ngModel]="precio" type="number" class="form-control " aria-describedby="emailHelp"
+                    placeholder=""   style="height: 36px">
+
+                    
+
+                </div> -->
+                <div class="col-4">
+
+                    <table>
+                        <tr>
+
+                            <th> <label for="exampleInputEmail1" class=" text-black-50 fw-bold fst-italic"
+                                    style="font-size: 14px;">Cant.</label>
+                                <input min="0" onkeypress="return event.charCode != 45"
+                                    (ngModelChange)="precioDocena($event)"  id="cantidad" name="cantidad"
+                                    [ngModel]="cantidad" style="width: 65px; margin-right: 2px; height: 36px; "
+                                    type="number" />
+                            </th>
+                            <th><label for="exampleInputEmail1" class=" text-black-50 fw-bold fst-italic"
+                                    style="font-size: 14px;">P.V.P</label>
+                                <input min="0" onkeypress="return event.charCode != 45" readonly id="precio"
+                                    name="precio" [(ngModel)]="precio"
+                                    style="width: 65px; margin-right: 2px; height: 36px; " type="number 3 " />
+                            </th>
+
+                            <th><label for="exampleInputEmail1" class=" text-black-50 fw-bold fst-italic"
+                                    style="font-size: 14px;">%Desc.</label>
+                                <input id="descuento" onkeypress="return event.charCode != 45" name="descuento"
+                                    (ngModelChange)="calcularDescuento($event)" [ngModel]="descuento"
+                                    style="width: 65px; margin-right: 2px; height: 36px; " type="number " />
+                            </th>
+
+                            <th><label for="exampleInputEmail1" class=" text-black-50 fw-bold fst-italic"
+                                    style="font-size: 14px;">Total</label>
+                                <input min="0" onkeypress="return event.charCode != 45" [ngModel]="totalDescuento"
+                                    readonly id="totalDescuento" name="totalDescuento"
+                                    style="width: 65px; margin-right: 2px; height: 36px; " type="number " />
+                            </th>
+                        </tr>
+
+
+
+
+                    </table>
+
+
+                </div>
+
+
+
+
+
+
+
+
+                <div class="col-2">
+
+                    <!-- <button class="btn btn-secondary "  style="margin-top: 22px; margin-left: 12px;border-radius: 50%;width:39px"><i class="fa fa-plus pt-1"></i></button> -->
+                    <i (click)="agregarProducto()" class="fa fa-plus-circle mt-4" title="agregar"
+                        style="font-size: 35px;color:#198754;cursor:pointer;margin-left: 60px;"></i>
+                </div>
+
+
+
+
+
+
+
+
+            </div>
+
+
+
+
+
+            <hr style="border-bottom: 1px dotted rgb(185, 185, 185) ;">
+
+
+
+
+
+
+            <table style="font-size: 12px;min-width: 674px;">
+                <thead style="background-color: rgb(185, 185, 185);" class="fondo-thead">
+                    <tr>
+                        <td style="width: 10%;border:1px solid black;font-weight: bold;" class="text-center">#</td>
+                        <td style="width: 60%;border:1px solid black;font-weight: bold;" class="text-center">Producto
+                        </td>
+                        <td style="width: 10%;border:1px solid black;font-weight: bold;" class="text-center">P.Unidad
+                        </td>
+                        <td style="width: 10%;border:1px solid black;font-weight: bold;" class="text-center">Descuento
+                        </td>
+                        <td style="width: 10%;border:1px solid black;font-weight: bold;" class="text-center">Subtotal
+                        </td>
+                        <td style="width: 10%;border:1px solid black;font-weight: bold;" class="text-center">Quitar
+                            Producto
+                        </td>
+
+                    </tr>
+
+
+                </thead>
+
+                <tbody *ngFor="let item of objDetalle">
+
+
+
+                    <tr>
+                        <td style="border:1px solid black;text-align: center;">{{item.cantidad}}</td>
+                        <td style="border:1px solid black;">{{item.producto}} {{item.talla}} </td>
+                        <td style="border:1px solid black;text-align: right;">{{item.precio}}</td>
+                        <td style="border:1px solid black;text-align: right;">{{item.descuento}}</td>
+                        <td style="border:1px solid black;text-align: right;">{{item.subtotal}}</td>
+                        <td style="border:1px solid black;text-align: center;"><i
+                                class="fa fa-minus-circle eliminar-btn" title='eliminar'
+                                style="cursor:pointer;font-size: 20px;color:red"
+                                (click)="quitar(item)"
+                                ></i></td>
+                    </tr>
+
+
+
+
+                </tbody>
+
+
+
+            </table>
+            <hr style="border-bottom: 1px dotted rgb(185, 185, 185) ;">
+            
+            <table style="font-size: 12px;margin-bottom: 15px;min-width: 674px;">
+                <tr>
+                    <td style="width: 10%;"></td>
+                    <td style="width: 60%;"></td>
+                    <td style="width: 10%;"></td>
+                    <td style="width: 10%;font-weight: bold; text-align: right;padding-right:4px ;">Subtotal</td>
+                    <td style="width: 10%;border:1px solid black;font-weight: bold;text-align: right;">{{subtotal | number : '1.2-2'}}</td>
+                </tr>
+
+                <tr>
+                    <td style="width: 10%;"></td>
+                    <td style="width: 60%;"></td>
+                    <td style="width: 10%;"></td>
+                    <td style="width: 10%;font-weight: bold;text-align: right;padding-right:4px ;">Iva %</td>
+                    <td style="width: 10%;border:1px solid black;font-weight: bold;text-align: right;">{{valorIva}}</td>
+                </tr>
+
+                <tr>
+                    <td style="width: 10%;"></td>
+                    <td style="width: 60%;"></td>
+                    <td style="width: 10%;"></td>
+                    <td style="width: 10%;font-weight: bold;text-align: right;padding-right:4px ;">Total</td>
+                    <td style="width: 10%;border:1px solid black;font-weight: bold;text-align: right;">{{total | number : '1.2-2'}}</td>
+                </tr>
+
+
+
+
+
+            </table>
+
+
+
+            <div class="row pb-2 text-center" style="margin-top: -71px; margin-left: 480px; " >
+
+                    <label id="labelIva" style="margin:0;padding:0;font-size:10px;font-weight: bold;padding-right: 185px;">IVA</label>
+                    <input [(ngModel)]="calculoIva" (ngModelChange)="comprobarIva($event)" id="calculoIva" name="calculoIva"  min="0" max="25" onkeypress="return event.charCode != 45"   style="width: 65px;z-index: 99;height: 21px;text-align: right;font-size: 13px;"  type="number"  /> 
+
+            </div>
+
+
+            <div class="row pb-4" style="margin-top: -20px;">
+                <div class="text-center " style="width: 100%;">
+                    <button (click)="guardarDatos()" class="btn btn-outline-success col-3">Guardar</button>
+                </div>
+
+            </div>
+
+
+
+
+
+
+
+
+        </div>
+
+    </div>
+
+
+</body>
+
+</html>
+

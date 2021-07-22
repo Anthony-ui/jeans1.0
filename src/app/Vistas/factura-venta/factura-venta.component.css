@@ -1,0 +1,71 @@
+@media print {
+  input 
+  {
+    display: none;
+  }
+
+  ng-select
+  {
+ display: none;
+  }
+
+  #icono
+  {
+  display: none;
+  }
+
+
+  #etiquetas table tr th label
+  {
+      display: none;
+  }
+
+  #espacio
+  {
+      display: none;
+  }
+
+
+  #linea
+  {
+      display: none;
+  }
+
+
+
+
+  button {
+    visibility: hidden;
+
+  }
+
+  .fondo-thead {
+    background-color: rgb(185, 185, 185) !important;
+  }
+
+  body {
+    -webkit-print-color-adjust: exact !important;
+  }
+
+  #contenedor {
+    padding-left: 0px !important;
+  }
+
+  #cabezera {
+    display: none;
+  }
+
+  #labelIva
+  {
+      visibility: hidden;
+  }
+
+}
+
+i.fa.fa-plus-circle:hover {
+  color: #0f5835 !important;
+}
+
+td i.eliminar-btn:hover {
+  color: rgb(133, 15, 15) !important;
+}

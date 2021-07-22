@@ -1,0 +1,12 @@
+.imagen{
+    background-image: url(../../../../assets/img/logo.jpg);
+    position: absolute;
+    color:#000;
+    width:292px;
+    height:25px;
+    top:15px;
+    left:499px;
+    border:none;
+    color:#ccc;
+    font-size:12px;
+}

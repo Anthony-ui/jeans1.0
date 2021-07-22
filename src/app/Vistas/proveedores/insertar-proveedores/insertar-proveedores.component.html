@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insertar Proveedores</title>
+
+
+</head>
+
+<body class="container mt-5">
+
+    <div class="card shadow pt-3 me-auto ms-auto border-white" style="max-width: 700px;">
+        <div class="card-body">
+            <form [formGroup]="proveedoresForm " (ngSubmit)="guardar(this.proveedoresForm.value)" focusedRow>
+
+
+
+                <div class="text-center mb-4">
+
+                    <h3 *ngIf="!IdProveedor" class=" text-black-50 fw-bold fst-italic">REGISTRO DE PROVEEDORES</h3>
+                    <h3 *ngIf="IdProveedor" class=" text-black-50 fw-bold fst-italic">EDITAR PROVEEDORES</h3>
+
+                </div>
+
+
+
+
+
+
+
+                <div class="row">
+                    <div class="form-group mb-3 col-sm col-sm-6 ms-auto me-auto ">
+
+
+
+                        
+
+                        <select   formControlName="esPasaporte"
+                            [class.border-danger]="proveedoresForm.get('esPasaporte')!.touched && proveedoresForm.get('esPasaporte')?.invalid"
+                            [class.border-primary]="proveedoresForm.get('esPasaporte')!.touched && proveedoresForm.get('esPasaporte')?.valid"
+                            type="text" class="form-select  ">
+                            <option value="" disabled>--Documento--</option>
+                            <option value="True">Pasaporte</option>
+                            <option value="False">Cedula</option>
+                        </select>
+
+
+
+                    </div>
+
+
+                    <!-- 
+                    <div class="form-group mb-3 col-sm-6 col-sm">
+
+
+                        <select formControlName="idSucursal"
+                            [class.border-danger]="proveedoresForm.get('idSucursal')!.touched && proveedoresForm.get('idSucursal')?.invalid"
+                            [class.border-primary]="proveedoresForm.get('idSucursal')!.touched && proveedoresForm.get('idSucursal')?.valid"
+                            type="text" class="form-select ">
+                            <option value="" disabled>--Seleccione Sucursal--</option>
+                            <option *ngFor="let item of sucursalesList" value="{{item.idSucursal}}">{{item.nombre}}
+                            </option>
+                        </select>
+
+                    </div> -->
+
+                </div>
+
+
+
+
+
+                <div class="form-group mb-3 ">
+
+
+
+                    <div class="row ">
+                        <div class="col-sm  col-sm-6">
+                            <label for="exampleInputEmail1" class=" text-black-50 fw-bold fst-italic">
+                                C.I - Pasaporte</label>
+                            <input formControlName="cedula"
+                                [class.is-invalid]="proveedoresForm.get('cedula')!.touched && proveedoresForm.get('cedula')?.invalid"
+                                [class.border-primary]="proveedoresForm.get('cedula')!.touched && proveedoresForm.get('cedula')?.valid"
+                                type="email" class="form-control    " aria-describedby="emailHelp"
+                                placeholder="Ingrese Cedula">
+                        </div>
+
+
+                        <div class="col-sm col-sm-6  ">
+                            <label for="exampleInputEmail1" class=" text-black-50 fw-bold fst-italic">Nombre</label>
+                            <input formControlName="nombre" type="email"
+                                [class.is-invalid]="proveedoresForm.get('nombre')!.touched && proveedoresForm.get('nombre')?.invalid"
+                                [class.border-primary]="proveedoresForm.get('nombre')!.touched && proveedoresForm.get('nombre')?.valid"
+                                class="form-control     " aria-describedby="emailHelp" placeholder="Ingrese Nombre">
+                        </div>
+
+
+
+                    </div>
+
+
+
+
+
+                </div>
+
+
+                <div class="form-group mb-3 ">
+
+                    <div class="row">
+
+
+                        <div class="col-sm col-sm-6">
+                            <label for="exampleInputEmail1" class=" text-black-50 fw-bold fst-italic">Celular</label>
+                            <input formControlName="celular"
+                                [class.is-invalid]="proveedoresForm.get('celular')!.touched && proveedoresForm.get('celular')?.invalid"
+                                [class.border-primary]="proveedoresForm.get('celular')!.touched && proveedoresForm.get('celular')?.valid"
+                                type="number" class="form-control  text-right" aria-describedby="emailHelp"
+                                placeholder="Ingrese celular">
+                        </div>
+
+                        <div class="col-sm col-sm-6">
+                            <label for="exampleInputEmail1" class=" text-black-50 fw-bold fst-italic">Telefono</label>
+                            <input formControlName="telefono"
+                                [class.is-invalid]="proveedoresForm.get('telefono')!.touched && proveedoresForm.get('telefono')?.invalid"
+                                [class.border-primary]="proveedoresForm.get('telefono')!.touched && proveedoresForm.get('telefono')?.valid"
+                                type="number" class="form-control    " aria-describedby="emailHelp"
+                                placeholder="Ingrese telefono">
+                        </div>
+
+
+
+                    </div>
+
+                </div>
+
+                <div class="form-group mb-3 ">
+                    <div class="row">
+                        <div class="col-sm col-sm-6">
+                            <label for="exampleInputEmail1" class=" text-black-50 fw-bold fst-italic">Direccion</label>
+                            <textarea formControlName="direccion"
+                                [class.is-invalid]="proveedoresForm.get('direccion')!.touched && proveedoresForm.get('direccion')?.invalid"
+                                [class.border-primary]="proveedoresForm.get('direccion')!.touched && proveedoresForm.get('direccion')?.valid"
+                                type="text" class="form-control    " aria-describedby="emailHelp"
+                                placeholder="Ingrese direccion" style="resize: none;height: 101px;"></textarea>
+                        </div>
+
+
+                        <div class="form-group col-sm col-sm-6 ">
+                            <div class="col-sm ">
+                                <label for="exampleInputEmail1" class=" text-black-50 fw-bold fst-italic">Correo</label>
+                                <input formControlName="correo"
+                                    [class.is-invalid]="proveedoresForm.get('correo')!.touched && proveedoresForm.get('correo')?.invalid"
+                                    [class.border-primary]="proveedoresForm.get('correo')!.touched && proveedoresForm.get('correo')?.valid"
+                                    type="email" class="form-control    " aria-describedby="emailHelp"
+                                    placeholder="Ingrese correo">
+
+
+
+
+                                <div class="form-group mt-4 col-12">
+
+
+
+
+
+                                    <select formControlName="idCiudad"
+                                        [class.border-danger]="proveedoresForm.get('idCiudad')!.touched && proveedoresForm.get('idCiudad')?.invalid"
+                                        [class.border-primary]="proveedoresForm.get('idCiudad')!.touched && proveedoresForm.get('idCiudad')?.valid"
+                                        type="text" class="form-select  ">
+                                        <option value="" disabled>--Seleccione Ciudad--</option>
+                                        <option *ngFor="let item of ciudadesList" value="{{item.idCiudad}}">
+                                            {{item.nombre}}</option>
+
+                                    </select>
+
+                                </div>
+                            </div>
+
+
+
+                        </div>
+
+
+
+                    </div>
+                </div>
+
+
+                <hr>
+
+
+                <div class="text-center">
+
+                    <button class="btn btn-primary col-sm-4 col-sm">Guardar</button>
+
+                    <button [routerLink]="[ '/menuPrincipal/listarProveedores' ]"
+                        class="btn btn-secondary col-sm-4 col-sm  m-3">Cancelar</button>
+                </div>
+
+
+            </form>
+        </div>
+    </div>
+
+
+</body>
+
+</html>

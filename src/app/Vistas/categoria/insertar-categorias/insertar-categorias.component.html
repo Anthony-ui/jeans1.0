@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+
+
+<body class="container">
+  
+  
+    <div class="   card shadow-lg  mt-5 col-sm-10 col-md-8 col-lg-5 col-xl-5  " style="margin-left: auto;margin-right: auto">
+
+        <div class="card-body">
+        <h3 class="text-center" *ngIf="!idCategoria">Nueva Categoria</h3>
+        <h3 class="text-center" *ngIf="idCategoria">Editar Categoria</h3>
+
+        <form novalidate (ngSubmit)="guardar(this.categoriaForm.value)" [formGroup]="categoriaForm">
+     
+
+            <div class="form-group pb-2 ">
+                
+
+                <label for="exampleInputEmail1" class=" text-black-50 fw-bold fst-italic pb-2">Nombre</label>
+                <input formControlName="nombre"
+                    [class.is-invalid]="categoriaForm.get('nombre')!.touched && categoriaForm.get('nombre')?.invalid"
+                    [class.border-primary]="categoriaForm.get('nombre')!.touched && categoriaForm.get('nombre')?.valid"
+                    type="text" class="form-control    " aria-describedby="emailHelp"
+                    placeholder="Ingrese nombre">
+
+            </div>
+            <div class="form-group pb-2">
+                
+
+                <label for="exampleInputEmail1" class=" text-black-50 fw-bold fst-italic pb-2">Descripcion</label>
+                <input formControlName="descripcion"
+                    [class.is-invalid]="categoriaForm.get('descripcion')!.touched && categoriaForm.get('descripcion')?.invalid"
+                    [class.border-primary]="categoriaForm.get('descripcion')!.touched && categoriaForm.get('descripcion')?.valid"
+                    type="text" class="form-control    "  aria-describedby="emailHelp"
+                    placeholder="Ingrese descripcion">
+
+            </div>
+
+            
+            <!-- <div class="form-group mt-4 col-12">
+
+
+
+
+
+                <select formControlName="idSucursal"
+                    [class.border-danger]="categoriaForm.get('idSucursal')!.touched && categoriaForm.get('idSucursal')?.invalid"
+                    [class.border-primary]="categoriaForm.get('idSucursal')!.touched && categoriaForm.get('idSucursal')?.valid"
+                    type="text" class="form-select  ">
+                    <option value="" disabled>--Seleccione Sucursal--</option>
+                    <option *ngFor="let item of sucursalesList" value="{{item.idSucursal}}">{{item.nombre}}</option>
+     
+                </select>
+
+            </div> -->
+        
+            
+
+<hr>
+        
+        <div class="text-center mt-3">
+            <div class="form-group">
+                <div class="row">
+                    
+                </div>
+                <button type="submit" class="btn btn-primary col-sm  col-sm-4" >Guardar</button>
+                <button (click)="navegar()" class="btn btn-secondary  col-sm col-sm-4  m-3" >Cancelar</button>
+              </div>
+        </div>
+        </form>
+    </div>
+             
+    </div>
+
+
+</body>
+
+
+</html>
+
+

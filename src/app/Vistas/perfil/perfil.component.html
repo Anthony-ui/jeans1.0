@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insertar Empleados</title>
+
+
+</head>
+
+<body class="container">
+
+    <div class="card shadow pt-3 me-auto ms-auto border-white" style="max-width: 700px;">
+        <div class="card-body">
+            <form [formGroup]="empleadosForm " (ngSubmit)="guardar(this.empleadosForm.value)" focusedRow>
+
+                <div class="container">
+
+                    <div class="text-center">
+
+                        <h3 *ngIf="!idEmpleado" class=" text-black-50 fw-bold fst-italic">REGISTRO DE EMPLEADOS</h3>
+                        <h3 *ngIf="idEmpleado" class=" text-black-50 fw-bold fst-italic">EDITAR EMPLEADO</h3>
+
+                    </div>
+                    <div class="text-center" *ngIf="!ruta">
+                        <input type="file" formControlName="imagen" (change)="asignarImagen($event)" class="d-none"
+                            #inputFoto id="imagen" name="imagen">
+
+                        <img [src]=" foto || '../../../../assets/img/img_sel4.png' "
+                            style="width: 140px; height: 140px;cursor: pointer;" class="redondo mb-3 shadow redondo"
+                            alt="No image" (click)="inputFoto.click()">
+
+                    </div>
+                    <div class="text-center" *ngIf="ruta">
+
+                        <input type="file" (change)="asignarImagen2($event)" class="d-none" #inputFoto2 id="imagen2"
+                            name="imagen2">
+
+                        <img [src]=" foto2 || ruta " style="width: 140px; height: 140px;cursor: pointer;"
+                            class="redondo mb-3 shadow redondo" alt="No image" (click)="inputFoto2.click()">
+
+                    </div>
+
+
+
+
+                </div>
+
+
+                <div class="row">
+                    <div class="form-group mb-3 col-xs-12  col-sm-6  col-md-6 ">
+
+
+
+
+
+                        <select formControlName="esPasaporte"
+              
+                            [class.border-danger]="empleadosForm.get('esPasaporte')!.touched && empleadosForm.get('esPasaporte')?.invalid"
+                            [class.border-primary]="empleadosForm.get('esPasaporte')!.touched && empleadosForm.get('esPasaporte')?.valid"
+                            
+                            type="text" class="form-select   "
+                            style="max-height: 36px;">
+                            <option value="" disabled>--Documento--</option>
+                            <option value="True">Pasaporte</option>
+                            <option value="False">Cedula</option>
+                        </select>
+
+                    </div>
+
+
+
+                    <!-- <div class="form-group mb-3 col-xs-12  col-sm-4 col-md-4">
+
+
+                        <select formControlName="idSucursal"
+                            [class.border-danger]="empleadosForm.get('idSucursal')!.touched && empleadosForm.get('idSucursal')?.invalid"
+                            [class.border-primary]="empleadosForm.get('idSucursal')!.touched && empleadosForm.get('idSucursal')?.valid"
+                            type="text" class="form-select ">
+                            <option value="" disabled>--Seleccione Sucursal--</option>
+                            <option *ngFor="let item of sucursalList" value="{{item.idSucursal}}">{{item.nombre}}
+                            </option>
+                        </select>
+
+                    </div> -->
+
+                    <div class="form-group mb-3 col-xs-12  col-sm-6 col-md-6">
+
+                        <select formControlName="idRol"
+                            [class.border-danger]="empleadosForm.get('idRol')!.touched && empleadosForm.get('idRol')?.invalid"
+                            [class.border-primary]="empleadosForm.get('idRol')!.touched && empleadosForm.get('idRol')?.valid"
+                            type="text" class="form-select ">
+                            <option value="" disabled>--Seleccione un Rol--</option>
+                            <option *ngFor="let item of rollList" value="{{item.idRol}}">{{item.nombre}}</option>
+
+
+
+                           
+                        </select> 
+
+
+                        <!-- <ng-select
+                        
+                        [class.borde-rojo]="empleadosForm.get('idRol')!.touched && empleadosForm.get('idRol')?.invalid"
+                        [class.borde-azul]="empleadosForm.get('idRol')!.touched && empleadosForm.get('idRol')?.valid"
+                      
+                        formControlName="idRol">
+                            <ng-option 
+                        
+                            *ngFor="let item of rollList" [value]="item.idRol">{{item.nombre}}
+                        
+                        </ng-option>
+
+                        
+                         </ng-select> -->
+
+                     
+
+
+
+                    </div>
+
+
+                  
+                </div>
+
+
+
+
+
+                <div class="form-group mb-3 ">
+
+
+
+                    <div class="row ">
+                        <div class="col-sm  col-sm-4">
+                            <label for="exampleInputEmail1" class=" text-black-50 fw-bold fst-italic">C.I -
+                                Pasaporte</label>
+                            <input formControlName="cedula" maxlength="17"
+                                [class.is-invalid]="empleadosForm.get('cedula')!.touched && empleadosForm.get('cedula')?.invalid"
+                                [class.border-primary]="empleadosForm.get('cedula')!.touched && empleadosForm.get('cedula')?.valid"
+                                type="email" class="form-control    " aria-describedby="emailHelp"
+                                placeholder="Ingrese Cedula">
+                        </div>
+                        <div class="col-sm col-sm-4  ">
+                            <label for="exampleInputEmail1" class=" text-black-50 fw-bold fst-italic">Nombre</label>
+                            <input formControlName="nombre" type="email"
+                                [class.is-invalid]="empleadosForm.get('nombre')!.touched && empleadosForm.get('nombre')?.invalid"
+                                [class.border-primary]="empleadosForm.get('nombre')!.touched && empleadosForm.get('nombre')?.valid"
+                                class="form-control     " aria-describedby="emailHelp" placeholder="Ingrese Nombre">
+                        </div>
+
+
+                        <div class="col-sm col-sm-4 ">
+                            <label for="exampleInputEmail1" class=" text-black-50 fw-bold fst-italic">Apellido</label>
+                            <input formControlName="apellido"
+                                [class.is-invalid]="empleadosForm.get('apellido')!.touched && empleadosForm.get('apellido')?.invalid"
+                                [class.border-primary]="empleadosForm.get('apellido')!.touched && empleadosForm.get('apellido')?.valid"
+                                type="text" class="form-control " aria-describedby="emailHelp"
+                                placeholder="Ingrese Apellido">
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-group mb-3 ">
+
+                    <div class="row">
+
+
+                        <div class="col-sm col-sm-2 ">
+                            <label for="exampleInputEmail1" class=" text-black-50 fw-bold fst-italic">Edad</label>
+                            <input  oninput="this.value = Math.abs(this.value)" formControlName="edad"
+                                [class.is-invalid]="empleadosForm.get('edad')!.touched && empleadosForm.get('edad')?.invalid"
+                                [class.border-primary]="empleadosForm.get('edad')!.touched && empleadosForm.get('edad')?.valid"
+                                type="number" class="form-control  text-right" aria-describedby="emailHelp"
+                                placeholder="Ingrese Edad">
+                        </div>
+
+                        <div class="col-sm col-sm-4">
+                            <label for="exampleInputEmail1" class=" text-black-50 fw-bold fst-italic">Celular</label>
+                            <input formControlName="celular" maxlength="15" minlength="10"
+                                [class.is-invalid]="empleadosForm.get('celular')!.touched && empleadosForm.get('celular')?.invalid"
+                                [class.border-primary]="empleadosForm.get('celular')!.touched && empleadosForm.get('celular')?.valid"
+                                type="number" class="form-control    " aria-describedby="emailHelp"
+                                placeholder="Ingrese Celular">
+                        </div>
+                        <div class="col-sm col-sm-6">
+                            <label for="exampleInputEmail1" class=" text-black-50 fw-bold fst-italic">Correo</label>
+                            <input formControlName="correo"
+                                [class.is-invalid]="empleadosForm.get('correo')!.touched && empleadosForm.get('correo')?.invalid"
+                                [class.border-primary]="empleadosForm.get('correo')!.touched && empleadosForm.get('correo')?.valid"
+                                type="text" class="form-control    " aria-describedby="emailHelp"
+                                placeholder="Ingrese Correo">
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="form-group mb-3 ">
+                    <div class="row">
+                        <div class="col-sm col-sm-6">
+                            <label for="exampleInputEmail1" class=" text-black-50 fw-bold fst-italic">Direccion</label>
+                            <textarea formControlName="direccion"
+                                [class.is-invalid]="empleadosForm.get('direccion')!.touched && empleadosForm.get('direccion')?.invalid"
+                                [class.border-primary]="empleadosForm.get('direccion')!.touched && empleadosForm.get('direccion')?.valid"
+                                type="text" class="form-control    " aria-describedby="emailHelp"
+                                placeholder="Ingrese Direccion" style="resize: none;height: 101px;"></textarea>
+                        </div>
+
+
+                        <div class="form-group col-sm col-sm-6 ">
+                            <div class="col-sm ">
+                                <label for="exampleInputEmail1"
+                                    class=" text-black-50 fw-bold fst-italic">Usuario</label>
+                                <input formControlName="usuario"
+                                    [class.is-invalid]="empleadosForm.get('usuario')!.touched && empleadosForm.get('usuario')?.invalid"
+                                    [class.border-primary]="empleadosForm.get('usuario')!.touched && empleadosForm.get('usuario')?.valid"
+                                    type="text" class="form-control    " aria-describedby="emailHelp"
+                                    placeholder="Ingrese Usuario">
+                            </div>
+
+                            <div class="col-sm ">
+                                <label for="exampleInputEmail1"
+                                    class=" text-black-50 fw-bold fst-italic">Contraseña</label>
+                                <input formControlName="contra"
+                                    [class.is-invalid]="empleadosForm.get('contra')!.touched && empleadosForm.get('contra')?.invalid"
+                                    [class.border-primary]="empleadosForm.get('contra')!.touched && empleadosForm.get('contra')?.valid"
+                                    type="password" class="form-control    " aria-describedby="emailHelp"
+                                    placeholder="Ingrese Contraseña">
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+
+
+ <hr>
+
+          
+
+
+
+                <div class="col-sm-12 col-md-6 " hidden>
+                    <label for="exampleInputEmail1">Fecha</label>
+                    <input type="date" formControlName="fechaRegistro"
+                        [class.is-invalid]="empleadosForm.get('fechaRegistro')!.touched && empleadosForm.get('fechaRegistro')?.invalid"
+                        [class.border-primary]="empleadosForm.get('fechaRegistro')!.touched && empleadosForm.get('fechaRegistro')?.valid"
+                        class="form-control    " aria-describedby="emailHelp" placeholder="Ingrese Fecha">
+                </div>
+
+
+
+  <div class="text-center">
+
+                    <button class="btn btn-primary col-4">Guardar</button>
+
+                    <button  [routerLink]="[ '/menuPrincipal' ]" class="btn btn-secondary col-4  m-3">Cancelar</button>
+                </div>
+                
+
+            </form>
+        </div>
+    </div>
+
+    <!-- solo recupera la ruta si el archivo tipo file 2 esta vacio !!!caso contrario sobreescribe la imagen  -->
+    <input type="text" [ngModel]="inputRuta" value="" class="d-none" />
+
+
+</body>
+
+</html>

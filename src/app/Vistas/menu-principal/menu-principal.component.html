@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+  rel="stylesheet"> -->
+  <title>Jeans-Pelileo</title>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" [routerLink]="['/menuPrincipal']">Jeans-Pelileo</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+          <li *ngIf="rol.toUpperCase() =='Administrador'.toUpperCase() " class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="navbarOpciones" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              Administración
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarOpciones">
+              <!-- <li><a class="dropdown-item" [routerLink]="['insertarEmpleados']">Registrar Empleados</a></li> -->
+              <li><a class="dropdown-item" [routerLink]="['listarConfiguraciones']"><i class="material-icons"
+                    style="font-size: 15px;">settings</i> Configuraciones</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" [routerLink]="['listarProvincias']"><i class="material-icons"
+                    style="font-size: 15px;">location_on</i> Provincias</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" [routerLink]="['listarCiudades']"><i class="material-icons"
+                    style="font-size: 15px;">location_city</i> Ciudades</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" [routerLink]="['listarSucursales']"><i class="material-icons"
+                    style="font-size: 15px;">store</i> Sucursales</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" [routerLink]="['listarRoles']"><i class="material-icons"
+                    style="font-size: 15px;">vpn_key</i> Roles-Empleados</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" [routerLink]="['listarEmpleados']"><i class="material-icons"
+                    style="font-size: 15px;">folder_shared</i> Empleados</a></li>
+            </ul>
+
+
+
+          </li>
+
+
+          <li
+            *ngIf="rol.toUpperCase() =='Bodeguero'.toUpperCase() || rol.toUpperCase() =='Administrador'.toUpperCase() "
+            class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="navbarOpciones" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              Bodega
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarOpciones">
+              <!-- <li><a class="dropdown-item" [routerLink]="['insertarEmpleados']">Registrar Empleados</a></li> -->
+              <li><a class="dropdown-item" [routerLink]="['listarProductos']"><i class="material-icons"
+                    style="font-size: 15px;">assignment_turned_in</i> Productos</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" [routerLink]="['listarCategorias']"><i class="material-icons"
+                    style="font-size: 15px;">list</i> Categoria</a></li>
+
+            </ul>
+
+
+
+          </li>
+
+
+
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="navbarOpciones" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              Compra
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarOpciones">
+              <!-- <li><a class="dropdown-item" [routerLink]="['insertarEmpleados']">Registrar Empleados</a></li> -->
+              <li><a class="dropdown-item" [routerLink]="['listarProveedores']"><i class="material-icons"
+                    style="font-size: 15px;">supervisor_account</i> Proveedores</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" [routerLink]="['facturaCompra']"><i class="material-icons"
+                    style="font-size: 15px;">receipt</i> Factura Compra</a></li>
+
+            </ul>
+
+
+
+          </li>
+
+
+
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="navbarOpciones" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              Venta
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarOpciones">
+              <!-- <li><a class="dropdown-item" [routerLink]="['insertarEmpleados']">Registrar Empleados</a></li> -->
+              <li><a class="dropdown-item" [routerLink]="['listarClientes']"><i class="material-icons"
+                    style="font-size: 15px;">supervisor_account</i>Clientes</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" [routerLink]="['facturaVenta']"><i class="material-icons"
+                    style="font-size: 15px;">receipt</i>Factura Venta</a></li>
+
+            </ul>
+
+
+
+          </li>
+
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="navbarOpciones" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              Facturas
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarOpciones">
+              <!-- <li><a class="dropdown-item" [routerLink]="['insertarEmpleados']">Registrar Empleados</a></li> -->
+              <li><a class="dropdown-item" [routerLink]="['listaFacturaCompra']"><i class="material-icons"
+                    style="font-size: 15px;">store</i>Compras</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" [routerLink]="['listaFacturaVenta']"><i class="material-icons"
+                    style="font-size: 15px;">book</i>Ventas</a></li>
+
+            </ul>
+
+
+
+          </li>
+
+
+        </ul>
+
+
+
+
+
+
+
+
+        <ul class="navbar-nav mb-2 mb-lg-0">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="menuUsuario" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              <img src="{{imagen}}" class="me-2 rounded-circle" alt="IMG" style="width: 27px;height: 27px;">{{ usuario}}
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="menuUsuario">
+
+              <li style="cursor: pointer;"><a class="dropdown-item"
+                  [routerLink]="['/menuPrincipal/perfil/',idUsuario]"><i class="fa fa-user pe-1"></i>Editar Perfil</a>
+              </li>
+              <!-- <li><a class="dropdown-item" [routerLink]="['listarEmpleados']">Empleados</a></li> -->
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li style="cursor: pointer;"><a class="dropdown-item" (click)="salir()"><i
+                    class=" fa  fa-sign-out-alt pe-1"></i>Salir</a></li>
+            </ul>
+          </li>
+        </ul>
+
+      </div>
+    </div>
+  </nav>
+
+
+
+  <router-outlet #frame="outlet"></router-outlet >
+
+  <div  *ngIf="!frame.isActivated"  class="container imagen " >
+
+    <div class="text-center mt-2 ">
+
+    <img class="img-fluid" src="../../../assets/logoPrincipal.png" >
+  </div>
+
+  </div>
+
+</body>
+
+</html>

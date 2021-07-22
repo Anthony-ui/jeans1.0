@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insertar Empleados</title>
+
+
+</head>
+
+<body class="container mt-3">
+
+<div class="text-center" *ngIf="espere==0" style="margin-top: 15em;">
+    <div class="spinner-border text-primary" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>
+
+    <div *ngIf="espere>0" class="card shadow pt-3 me-auto ms-auto border-white" style="max-width: 700px;">
+        <div class="card-body">
+            <form [formGroup]="productosForm "  (ngSubmit)="guardarProductos(this.productosForm.value)" focusedRowfocusedRow>
+
+                <!-- (ngSubmit)="guardar(this.productosForm.value)" -->
+
+                <div class="container">
+
+                    <div class="text-center">
+
+                        <h3 *ngIf="!idProducto" class=" text-black-50 fw-bold fst-italic">REGISTRO DE PRODUCTOS</h3>
+                        <h3 *ngIf="idProducto" class=" text-black-50 fw-bold fst-italic">EDITAR PRODUCTOS</h3>
+
+                    </div>
+                    <div class="text-center" *ngIf="!ruta">
+                        <input type="file" (ngSubmit)="guardarProductos(this.productosForm.value)" formControlName="imagen" (change)="asignarImagen($event)" class="d-none" #inputFoto id="imagen" name="imagen">
+
+                        <img [src]=" foto || '../../../../assets/img/img_sel4.png' "
+                            style="width: 140px; height: 140px;cursor: pointer;" class="rounded-circle mb-3 shadow "
+                            alt="No image" (click)="inputFoto.click()">
+
+
+                        <!-- (change)="asignarImagen($event)"
+                            *ngIf="!ruta" -->
+
+                    </div>
+                    <div class="text-center" *ngIf="ruta">
+
+                        <input type="file" (change)="asignarImagen2($event)" class="d-none" #inputFoto2 id="imagen2"
+                            name="imagen2">
+
+                        <img [src]=" foto2 || ruta " style="width: 140px; height: 140px;cursor: pointer;"
+                            class="redondo mb-3 shadow redondo" alt="No image" (click)="inputFoto2.click()">
+
+                    </div>
+
+
+
+
+                </div>
+
+
+                <div class="row" >
+                    <div class="form-group mb-3 col-xs-12  col-sm-6  col-md-6  me-auto ms-auto">
+
+
+
+
+
+                        <select formControlName="idCategoria"
+                            [class.border-danger]="productosForm.get('idCategoria')!.touched && productosForm.get('idCategoria')?.invalid"
+                            [class.border-primary]="productosForm.get('idCategoria')!.touched && productosForm.get('idCategoria')?.valid"
+                            type="text" class="form-select  ">
+                            <option value="" disabled>--Seleccione Categoria--</option>
+                            <option *ngFor="let item of categoriaList" value="{{item.idCategoria}}">{{item.nombre}}</option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <!-- <div class="form-group mb-3 col-xs-12  col-sm-4 col-md-4">
+
+
+                        <select formControlName="idSucursal"
+                            [class.border-danger]="productosForm.get('idSucursal')!.touched && productosForm.get('idSucursal')?.invalid"
+                            [class.border-primary]="productosForm.get('idSucursal')!.touched && productosForm.get('idSucursal')?.valid"
+                            type="text" class="form-select ">
+                            <option  value="" disabled>--Seleccione Sucursal--</option>
+                            <option *ngFor="let item of sucursalesList" value="{{item.idSucursal}}">{{item.nombre}} </option>
+                        </select>
+
+                    </div> -->
+
+                    <div class="form-group mb-3 col-xs-12  col-sm-6 col-md-6">
+
+
+                        <select formControlName="idProveedor"
+                            [class.border-danger]="productosForm.get('idProveedor')!.touched && productosForm.get('idProveedor')?.invalid"
+                            [class.border-primary]="productosForm.get('idProveedor')!.touched && productosForm.get('idProveedor')?.valid"
+                            type="text" class="form-select ">
+                            <option value="" disabled>--Seleccione Proveedor--</option>
+                            <option *ngFor="let item of proveedoresList" value="{{item.idProveedor}}">{{item.nombre}}</option>
+                        </select>
+
+                    </div>
+                </div>
+
+
+
+
+
+                <div class="form-group mb-3 ">
+
+
+
+                    <div class="row ">
+                        <div class="col-sm  col-sm-4">
+                            <label for="exampleInputEmail1" class=" text-black-50 fw-bold fst-italic">Nombre
+                            </label>
+                            <input formControlName="nombre"
+                                [class.is-invalid]="productosForm.get('nombre')!.touched && productosForm.get('nombre')?.invalid"
+                                [class.border-primary]="productosForm.get('nombre')!.touched && productosForm.get('nombre')?.valid"
+                                type="text" class="form-control    " aria-describedby="emailHelp"
+                                placeholder="Ingrese Nombre">
+                        </div>
+                        <div class="col-sm col-sm-2  ">
+                            <label for="exampleInputEmail1" class=" text-black-50 fw-bold fst-italic">Talla</label>
+                            <input formControlName="talla" type="text"
+                                [class.is-invalid]="productosForm.get('talla')!.touched && productosForm.get('talla')?.invalid"
+                                [class.border-primary]="productosForm.get('talla')!.touched && productosForm.get('talla')?.valid"
+                                class="form-control     " aria-describedby="emailHelp" placeholder="Talla">
+                        </div>
+
+
+                      
+
+
+                        
+                        <div class="col-sm col-sm-2  ">
+                            <label for="exampleInputEmail1" class=" text-black-50 fw-bold fst-italic">Stock</label>
+                            <input onkeypress="return (event.charCode >= 48 && event.charCode <= 57)"  formControlName="stock"
+                                [class.is-invalid]="productosForm.get('stock')!.touched && productosForm.get('stock')?.invalid"
+                                [class.border-primary]="productosForm.get('stock')!.touched && productosForm.get('stock')?.valid"
+                                type="number" class="form-control " aria-describedby="emailHelp"
+                                placeholder="Stock">
+                        </div>
+
+
+                        <div class="col-sm col-sm-2  ">
+                            <label  for="exampleInputEmail1" class=" text-black-50 fw-bold fst-italic">$Unidad</label>
+                            <input onkeypress="return event.charCode != 45" formControlName="precioUnidad" type="number"
+                                [class.is-invalid]="productosForm.get('precioUnidad')!.touched && productosForm.get('precioUnidad')?.invalid"
+                                [class.border-primary]="productosForm.get('precioUnidad')!.touched && productosForm.get('precioUnidad')?.valid"
+                                class="form-control     " aria-describedby="emailHelp" placeholder="Ingrese Precio Unidad">
+                        </div>
+
+
+                        <div class="col-sm col-sm-2 ">
+                            <label for="exampleInputEmail1" class=" text-black-50 fw-bold fst-italic">$Docena</label>
+                            <input onkeypress="return event.charCode != 45"   formControlName="precioDocena"
+                                [class.is-invalid]="productosForm.get('precioDocena')!.touched && productosForm.get('precioDocena')?.invalid"
+                                [class.border-primary]="productosForm.get('precioDocena')!.touched && productosForm.get('precioDocena')?.valid"
+                                type="number" class="form-control " aria-describedby="emailHelp"
+                                placeholder="Ingrese Precio Docena">
+                        </div>
+
+
+
+
+                    </div>
+
+
+
+                    <div class="form-group mt-3 ">
+                        <div class="row">
+
+                        <div class="col-sm col-sm-6 ">
+                            <label for="exampleInputEmail1"
+                                class=" text-black-50 fw-bold fst-italic">Descripcion</label>
+                            <input  formControlName="descripcion"
+                                [class.is-invalid]="productosForm.get('descripcion')!.touched && productosForm.get('descripcion')?.invalid"
+                                [class.border-primary]="productosForm.get('descripcion')!.touched && productosForm.get('descripcion')?.valid"
+                                type="text" class="form-control" aria-describedby="emailHelp"
+                                placeholder="Ingrese Descripcion" style="height: 70px;">
+                        </div>  
+
+                        <div class="col-sm  col-sm-2 mt-3">
+                            <label for="exampleInputEmail1" class=" text-black-50 fw-bold fst-italic">
+                                $Compra</label>
+                            <input  onkeypress="return event.charCode != 45"   formControlName="precioCompra"
+                                [class.is-invalid]="productosForm.get('precioCompra')!.touched && productosForm.get('precioCompra')?.invalid"
+                                [class.border-primary]="productosForm.get('precioCompra')!.touched && productosForm.get('precioCompra')?.valid"
+                                type="number" class="form-control    " aria-describedby="emailHelp"
+                                placeholder="Ingrese Precio Compra">
+                        </div>
+
+                        <div onkeypress="return event.charCode != 45"   class="col-sm  col-sm-2 mt-3">
+                            <label for="exampleInputEmail1" class=" text-black-50 fw-bold fst-italic"> Ganancia</label>
+                            <input  formControlName="margenGanancia"
+                                [class.is-invalid]="productosForm.get('margenGanancia')!.touched && productosForm.get('margenGanancia')?.invalid"
+                                [class.border-primary]="productosForm.get('margenGanancia')!.touched && productosForm.get('margenGanancia')?.valid"
+                                type="number" class="form-control  " aria-describedby="emailHelp"
+                                placeholder="Ganancia">
+                        </div>
+                        <div onkeypress="return event.charCode != 45"   class="col-sm col-sm-2 mt-3  ">
+                            <label for="exampleInputEmail1" class=" text-black-50 fw-bold fst-italic">Descuento</label>
+                            <input  formControlName="maxDescuento" type="number"
+                                [class.is-invalid]="productosForm.get('maxDescuento')!.touched && productosForm.get('maxDescuento')?.invalid"
+                                [class.border-primary]="productosForm.get('maxDescuento')!.touched && productosForm.get('maxDescuento')?.valid"
+                                class="form-control     " aria-describedby="emailHelp" placeholder="Descuento">
+                        </div>
+
+                   
+
+                    </div>
+
+                    </div>
+
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                <hr>
+
+
+
+
+
+
+
+
+                <div class="text-center">
+
+                    <button class="btn btn-primary col-4" > Guardar</button>
+
+                    <button [routerLink]="[ '/menuPrincipal/listarProductos' ]"
+                        class="btn btn-secondary col-4  m-3">Cancelar</button>
+                </div>
+
+
+            </form>
+        </div>
+    </div>
+
+    <!-- solo recupera la ruta si el archivo tipo file 2 esta vacio !!!caso contrario sobreescribe la imagen  -->
+    <input type="text" [ngModel]="inputRuta" value="" class="d-none"/>
+
+
+</body>
+
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html >
+<html lang="es" class="bg-dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+<body class="container-fluid bg-dark ">
+<h3 class="text-center text-white animate__animated animate__fadeIn  animate__delay-1s" style="padding-top: 6rem;padding-bottom: 1rem;"><strong>JEANS</strong> Pelileo</h3>
+
+  <div class="card me-auto ms-auto animate__animated animate__fadeInLeft "   style="max-width: 500px;">
+    <label class="text-muted font-smaller text-center  pt-4 pb-4">Ingrese sus credenciales</label>
+    <div class="card-body pt-2 pb-3" >
+
+      <form  [formGroup]="loginForm"(ngSubmit)="inicioSesion(loginForm.value)">       
+        <div class="mb-3">
+
+          <div class="text-center col-12" *ngIf="sucursalesList.length == 0">
+            <label  class="text-danger">No existen sucursales</label>
+          </div>
+          <span *ngIf="loginForm.get('sucursales')!.touched && loginForm.get('sucursales')?.invalid" class="text-danger"><small>Seleccione una sucursal</small> </span>
+            <select formControlName=sucursales [class.border-danger]="loginForm.get('sucursales')!.touched && loginForm.get('sucursales')?.invalid" type="text" class="form-select" *ngIf="sucursalesList.length > 0">
+              <option value="" *ngIf="sucursalesList.length > 0">--Seleccione una sucursal--</option>  
+                <option *ngFor="let item of sucursalesList" value="{{item.idSucursal}}">{{item.nombre}}</option>
+            </select>    
+          </div>  
+        
+        <span *ngIf="loginForm.get('usuario')!.touched && loginForm.get('usuario')?.invalid" class="text-danger"><small>Ingrese su usuario</small> </span>
+        <div class="input-group mb-3">
+          <input formControlName= "usuario" [class.is-invalid]="loginForm.get('usuario')!.touched && loginForm.get('usuario')?.invalid" type="text" class="form-control" placeholder="Usuario">
+
+        </div>
+
+        <span *ngIf="loginForm.get('contra')!.touched && loginForm.get('contra')?.invalid"  class="text-danger"><small>Ingrese su contraseña</small> </span>
+        <div class="input-group mb-3">
+          <input formControlName="contra" [class.is-invalid]="loginForm.get('contra')!.touched && loginForm.get('contra')?.invalid" type="password" class="form-control" placeholder="Contraseña">
+        </div>
+        <div  *ngIf="bool==0" class="row">
+          <div class="mx-auto gap-2 d-grid text-center col-sm-6 col-md-6">
+            <button class="btn btn-primary">Ingresar</button>
+          </div>
+             
+                
+               
+        </div>
+
+        <div *ngIf="bool==1" class="text-center">
+          <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </div>
+      </form>
+
+
+    </div>
+    <div class="text-center text-muted ">
+      <p><small>©Copyright-2021 Eduardo Panta</small>  </p>
+    </div>
+  </div>
+
+  
+
+    
+
+
+    
+    </body>
+</html>

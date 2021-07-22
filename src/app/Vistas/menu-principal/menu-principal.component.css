@@ -1,0 +1,83 @@
+ul.dropdown-menu li a:hover{
+background-color: #0B5ED7;
+color:white;
+/* transition: 0.5s; */
+}
+
+li.nav-item.dropdown a.dropdown-toggle:hover{
+
+    color:white;
+    transition: 0.75s;
+}
+
+/* a.navbar-brand:hover{
+    transition: 1s;
+    transform: rotate3d(1, 1, 1, 360deg);
+} */
+
+
+a.navbar-brand{
+    animation: 1.5s ease-out 0s 1 entrada;
+} 
+
+a.navbar-brand:hover{
+    color:white;
+    text-shadow: 2px 2px  gray;
+} 
+
+
+@keyframes entrada {
+    0% { 
+      transform: translateX(-100%);
+      transform: rotate3d(1, 1, 1, 360deg);
+     }
+    100% { 
+      /* transform: translateX(0); */
+     }
+  }
+
+  @media print{
+    select{
+     display: none;
+
+
+    }
+
+    nav{
+        display: none;
+    }
+    
+}
+
+@media only screen and (max-width: 991px)  {
+   .imagen{
+       margin-top: 6em;
+
+   }
+  
+  }
+
+  @media only screen and (max-width: 767px)  {
+    .imagen{
+        margin-top: 9em;
+ 
+    }
+   
+   }
+
+
+   @media only screen and (max-width:  500px)  {
+    .imagen{
+        margin-top: 11em;
+
+ 
+    }
+   
+   }
+
+   .imagen
+   {
+       opacity: 0.3;
+    
+        
+   }

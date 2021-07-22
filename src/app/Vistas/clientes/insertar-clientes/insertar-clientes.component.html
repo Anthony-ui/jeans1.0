@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clientes</title>
+</head>
+
+
+
+<body class="container  ">
+
+
+    <div class="   card shadow-lg  mt-4 col-sm-10 col-md-8 col-lg-7 col-xl-5  "
+        style="margin-left: auto;margin-right: auto">
+
+        <div class="card-body">
+            <h3 class="text-center" *ngIf="!idCliente">Nuevo Cliente</h3>
+            <h3 class="text-center" *ngIf="idCliente">Editar Cliente</h3>
+
+            <form novalidate (ngSubmit)="guardar(this.clientesForm.value)" [formGroup]="clientesForm">
+
+
+                <div class="row form-group pb-2">
+
+
+                    <div class="col mt-3">
+
+                        <select formControlName="esPasaporte"
+                            [class.border-danger]="clientesForm.get('esPasaporte')!.touched && clientesForm.get('esPasaporte')?.invalid"
+                            [class.border-primary]="clientesForm.get('esPasaporte')!.touched && clientesForm.get('esPasaporte')?.valid"
+                            type="text" class="form-select ">
+                            <option value="" selected>--Seleccione Documento--</option>
+                            <option value="True">Pasaporte</option>
+                            <option value="False">Cedula</option>
+                        </select>
+
+
+
+
+                    </div>
+
+
+
+
+                    <!-- <div class="col">
+                        
+                    <select formControlName="idSucursal"
+                    [class.border-danger]="clientesForm.get('idSucursal')!.touched && clientesForm.get('idSucursal')?.invalid"
+                    [class.border-primary]="clientesForm.get('idSucursal')!.touched && clientesForm.get('idSucursal')?.valid"
+                    type="text" class="form-select  mt-3">
+                    <option value="" selected>--Seleccione Sucursal--</option>
+                    <option *ngFor="let item of sucursalList"  value="{{item.idSucursal}}">{{item.nombre}}</option>
+                   </select>
+
+
+                    </div> -->
+
+
+
+
+
+
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                <div class="form-group pb-2 ">
+
+
+                    <label for="exampleInputEmail1" class=" text-black-50 fw-bold fst-italic">C.I -
+                        Pasaporte</label>
+                    <input formControlName="cedula"
+                        [class.is-invalid]="clientesForm.get('cedula')!.touched && clientesForm.get('cedula')?.invalid"
+                        [class.border-primary]="clientesForm.get('cedula')!.touched && clientesForm.get('cedula')?.valid"
+                        type="text" class="form-control    " aria-describedby="emailHelp" placeholder="Ingrese cedula">
+
+                </div>
+
+
+
+
+                <div class="form-group pb-2 ">
+
+
+                    <label for="exampleInputEmail1" class=" text-black-50 fw-bold fst-italic">Nombre</label>
+                    <input formControlName="nombre"
+                        [class.is-invalid]="clientesForm.get('nombre')!.touched && clientesForm.get('nombre')?.invalid"
+                        [class.border-primary]="clientesForm.get('nombre')!.touched && clientesForm.get('nombre')?.valid"
+                        type="text" class="form-control    " aria-describedby="emailHelp" placeholder="Ingrese nombre">
+
+                </div>
+
+
+
+
+
+
+                <div class="form-group pb-2">
+
+
+                    <label for="exampleInputEmail1" class=" text-black-50 fw-bold fst-italic">Apellido</label>
+                    <input formControlName="apellido"
+                        [class.is-invalid]="clientesForm.get('apellido')!.touched && clientesForm.get('apellido')?.invalid"
+                        [class.border-primary]="clientesForm.get('apellido')!.touched && clientesForm.get('apellido')?.valid"
+                        type="text" class="form-control    " aria-describedby="emailHelp"
+                        placeholder="Ingrese apellido">
+
+                </div>
+                <div class="form-group pb-2 ">
+
+
+                    <label for="exampleInputEmail1" class=" text-black-50 fw-bold fst-italic">Direccion</label>
+                    <input formControlName="direccion"
+                        [class.is-invalid]="clientesForm.get('direccion')!.touched && clientesForm.get('direccion')?.invalid"
+                        [class.border-primary]="clientesForm.get('direccion')!.touched && clientesForm.get('direccion')?.valid"
+                        type="text" class="form-control " aria-describedby="emailHelp"
+                        placeholder="Ingrese direccion">
+
+                </div>
+
+
+
+                <div class="form-group pb-2 ">
+
+
+                    <label for="exampleInputEmail1" class=" text-black-50 fw-bold fst-italic">Celular</label>
+                    <input formControlName="celular"
+                        [class.is-invalid]="clientesForm.get('celular')!.touched && clientesForm.get('celular')?.invalid"
+                        [class.border-primary]="clientesForm.get('celular')!.touched && clientesForm.get('celular')?.valid"
+                        type="number" class="form-control    " aria-describedby="emailHelp"
+                        placeholder="Ingrese celular">
+
+                </div>
+
+
+                <div class="form-group pb-2 ">
+
+
+                    <label for="exampleInputEmail1" class=" text-black-50 fw-bold fst-italic">Correo</label>
+                    <input formControlName="correo"
+                        [class.is-invalid]="clientesForm.get('correo')!.touched && clientesForm.get('correo')?.invalid"
+                        [class.border-primary]="clientesForm.get('correo')!.touched && clientesForm.get('correo')?.valid"
+                        type="text" class="form-control    " aria-describedby="emailHelp"
+                        placeholder="Ingrese correo">
+
+                </div>
+
+                
+
+
+
+
+
+
+
+
+                <div class="text-center mt-4">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary col-4-sm col-sm-4 ">Guardar</button>
+                        <button (click)="navegar()" class="btn btn-secondary  col-sm col-sm-4 m-3">Cancelar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+
+</body>
+
+
+</html>

@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fatura Venta</title>
+
+</head>
+
+
+<div class="text-uppercase text-center pt-2 desaparecer" id="desaparecer">
+    <h3 style="font-weight: bold;"> <i class="material-icons" style="font-size:30px;">search </i> Facturas (Ventas)
+    </h3>
+</div>
+
+<div class="col-3 ms-auto me-auto desaparecer">
+    <div class="input-group  ">
+
+
+
+
+
+
+
+
+        <input [(ngModel)]="identificador" (keyup)="borrar($event)" min="0" onkeypress="return event.charCode != 45"
+            type="number" class="form-control " aria-describedby="emailHelp" placeholder="  Ingrese Identificador">
+
+
+
+
+
+
+        <div class="input-group-append ms-1">
+
+            <button (click)="listarEncabezado()" class="btn btn-outline-primary "> <i class="material-icons"
+                    style="font-size: 20px;">search</i>Buscar</button>
+
+        </div>
+
+
+
+    </div>
+</div>
+
+
+<div class=" col-2 col-sm-2 ms-auto me-auto pb-3 mt-4  ">
+
+
+
+    <div class="row text-center mt-3 desaparecer">
+        <div class="col mt-2">
+            <button (click)="anular()"
+                class="btn btn-outline-danger col-auto  col-sm-12 col-md-12 col-lg-12">Anular</button>
+        </div>
+
+
+
+        <div class="col mt-2 desaparecer">
+            <button [routerLink]="[ '/menuPrincipal']"
+                class="btn btn-outline-secondary col-auto col-sm-12 col-md-12 col-lg-12">Salir</button>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+<body>
+    <div id="contenedor" name="contenedor" class="table-responsive ps-2">
+
+
+        <div class="card container-fluid mt-2 mb-2"
+            style="min-width: 700px; max-width: 700px; border: 1px solid  black ;">
+
+
+
+            <div class="card-header mb-2" style="border: none;border-bottom: 1px dotted rgb(185, 185, 185)">
+                <div class="row">
+
+                    <div class="col-8 text-center">
+
+
+                        <h5>{{objEncabezado[0]?.configuracion.propietario}}</h5>
+                        <P style="font-size:x-small; line-height: 0px;">VENTA AL POR MAYOR Y MENOR DE PRENDA DE VESTIR
+                        </P>
+                        <P style="font-size:x-small;line-height: 0px;">{{objEncabezado[0]?.configuracion.direccion}}</P>
+                        <P style="font-size:x-small;line-height: 0px;">
+                            <strong>Celular:</strong>{{objEncabezado[0]?.configuracion.celular}}
+                        </P>
+                        <P style="font-size:small;line-height: 0px; font-weight: bold;">Pelileo Ecuador</P>
+
+
+                    </div>
+
+                    <div class="col-4  text-center" style="border:black 1px solid;">
+
+
+                        <table style="width: 100%;margin-top: 8px; margin-bottom: 8px; font-size: 13px;" cellpading="0">
+                            <tr>
+                                <td><strong>N.Ruc.</strong>{{objEncabezado[0]?.configuracion.ruc}}</td>
+                            </tr>
+                            <tr style="border-bottom: 1px dotted rgb(185, 185, 185)">
+                                <td></td>
+                            </tr>
+                            <tr style="font-size: 15px;">
+                                <td style="height: 30px;"> <strong
+                                        style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">FACTURA N.
+                                    </strong>{{objEncabezado[0]?.idFacturaVenta}}</td>
+                            </tr>
+                            <tr style="border-bottom: 1px dotted rgb(185, 185, 185)">
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td> <strong>Aut.SRI-</strong>{{objEncabezado[0]?.configuracion.autorizacionSri}}</td>
+                            </tr>
+                        </table>
+
+
+
+
+
+
+                    </div>
+
+
+
+
+
+                </div>
+
+            </div>
+
+
+
+            <table style="font-size: 12px;">
+
+                <tr style="height: 20px;">
+                    <td style="width:10%;">
+                        <strong>Cedula:</strong>
+                    </td>
+                    <td style="width:13%;">
+
+                        {{objEncabezado[0]?.cliente.cedula }}
+
+
+
+
+
+                    </td>
+
+                    <td style="width:7%;">
+                        <strong>Cliente:</strong>
+                    </td>
+
+                    <td colspan="3" style="width:65%;">
+                        {{objEncabezado[0]?.cliente.nombre }}
+                    </td>
+                </tr>
+
+                <tr style="height: 20px;">
+                    <td>
+                        <strong>Direccion:</strong>
+                    </td>
+                    <td colspan="5">
+                        {{objEncabezado[0]?.cliente.direccion }}
+                    </td>
+
+
+
+
+                </tr>
+
+                <tr style="height: 20px;">
+
+
+                    <td>
+                        <strong>Fecha:</strong>
+                    </td>
+                    <td>
+                        {{ objEncabezado[0]?.fecha | date:'yyyy-MM-dd' }}
+                    </td>
+
+                    <td>
+                        <strong>Telefono:</strong>
+                    </td>
+                    <td style="width: 13%;">
+                        {{objEncabezado[0]?.cliente.celular }}
+                    </td>
+
+
+                    <td style="width: 6%;">
+                        <strong> Correo:</strong>
+                    </td>
+                    <td colspan="2">
+                        {{objEncabezado[0]?.cliente.correo }}
+                    </td>
+
+
+
+
+                </tr>
+
+
+
+
+
+            </table>
+
+
+
+            <hr style="border-bottom: 1px dotted rgb(185, 185, 185) ;">
+
+
+
+
+
+
+
+
+
+
+            <table style="font-size: 12px;min-width: 674px;">
+                <thead style="background-color: rgb(185, 185, 185);" class="fondo-thead">
+                    <tr>
+                        <td style="width: 10%;border:1px solid black;font-weight: bold;" class="text-center">#</td>
+                        <td style="width: 60%;border:1px solid black;font-weight: bold;" class="text-center">Producto
+                        </td>
+                        <td style="width: 10%;border:1px solid black;font-weight: bold;" class="text-center">P.Unidad
+                        </td>
+                        <td style="width: 10%;border:1px solid black;font-weight: bold;" class="text-center">Descuento
+                        </td>
+                        <td style="width: 10%;border:1px solid black;font-weight: bold;" class="text-center">Subtotal
+                        </td>
+
+                    </tr>
+
+
+                </thead>
+
+                <tbody>
+
+
+
+                    <tr *ngFor="let item of objDetalle; let i=index">
+                        <td style="border:1px solid black;text-align: center;">{{this.objDetalle[i].cantidad}}</td>
+                        <td style="border:1px solid black;"> {{this.objDetalle[i].producto.nombre}} </td>
+                        <td style="border:1px solid black;text-align: right;">{{this.objDetalle[i].precio}}</td>
+                        <td style="border:1px solid black;text-align: right;">{{this.objDetalle[i].descuento}}</td>
+                        <td style="border:1px solid black;text-align: right;"> {{ this.objDetalle[i].cantidad *
+                            this.objDetalle[i].precio - this.objDetalle[i].descuento | number : '1.2-2' }} </td>
+
+                    </tr>
+
+
+
+
+                </tbody>
+
+
+
+            </table>
+            <hr style="border-bottom: 1px dotted rgb(185, 185, 185) ;">
+
+
+
+            <table style="font-size: 12px;margin-bottom: 15px;min-width: 674px;">
+                <tr>
+                    <td style="width: 10%;"></td>
+                    <td style="width: 60%;"></td>
+                    <td style="width: 10%;"></td>
+                    <td style="width: 10%;font-weight: bold; text-align: right;padding-right:4px ;">Subtotal</td>
+                    <td style="width: 10%;border:1px solid black;font-weight: bold;text-align: right;">{{acumulador |
+                        number : '1.2-2' }}
+                    </td>
+                </tr>
+
+                <tr>
+                    <td style="width: 10%;"></td>
+                    <td style="width: 60%;"></td>
+                    <td style="width: 10%;"></td>
+                    <td style="width: 10%;font-weight: bold;text-align: right;padding-right:4px ;">Iva %</td>
+                    <td style="width: 10%;border:1px solid black;font-weight: bold;text-align: right;">{{this.impIva}}
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="botones desaparecerA" id="desaparecerA" style="width: 10%; font-size: medium;">
+                        <strong *ngIf="activo==true "> <span class="text-success ">Activo</span> </strong>
+                        <strong *ngIf="activo==false "> <span class="text-danger ">Anulado</span> </strong>
+
+                    </td>
+                    <td style="width: 60%;"></td>
+                    <td style="width: 10%;"></td>
+                    <td style="width: 10%;font-weight: bold;text-align: right;padding-right:4px ;">Total</td>
+                    <td style="width: 10%;border:1px solid black;font-weight: bold;text-align: right;">{{precioTotal |
+                        number : '1.2-2'}}
+                    </td>
+                </tr>
+
+
+
+
+
+            </table>
+
+
+
+            <div class="row pb-2 text-center" style="margin-top: -71px; margin-left: 480px; ">
+
+                <label id="labelIva"
+                    style="margin:0;padding:0;font-size:10px;font-weight: bold;padding-right: 185px;">IVA</label>
+                <input readonly [(ngModel)]="calculoIva" id="calculoIva" name="calculoIva" min="0" max="25"
+                    onkeypress="return event.charCode != 45"
+                    style="width: 65px;z-index: 99;height: 21px;text-align: right;font-size: 13px;" type="number" />
+
+            </div>
+
+
+
+
+
+
+
+            <div class="row pb-4" style="margin-top: -20px;">
+                <div class="text-center " style="width: 100%;">
+                    <button style="visibility: hidden;" class="btn btn-outline-success col-3">Guardar</button>
+
+                </div>
+
+
+
+            </div>
+
+
+
+
+
+        </div>
+
+    </div>
+
+
+
+    <a  *ngIf="objEncabezado.length!=0" (click)="imprimir()" style="cursor: pointer" class="btn-wsp desaparecer ">
+
+        <i class="material-icons icono">print</i>
+
+    </a>
+
+
+
+</body>
+
+</html>

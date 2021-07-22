@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listar Ciudades</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="text-uppercase text-center pt-3 pb-2 ">
+            <h3 style="font-weight: bold;"><i class="material-icons">location_city</i> Ciudades</h3>
+        </div>
+    </div>
+    <div class="container-fluid  col-8  col-sm-6  col-lg-4  mt-3">
+        <div class="row">
+
+            <input  [(ngModel)]="busqueda" (keyup)="buscador($event)"   name="buscar" id="buscar" type="text" class="form-control " aria-describedby="emailHelp"
+                placeholder="Buscar Ciudad">
+
+        </div>
+
+
+    </div>
+    <div class="text-center mt-4 ">
+        <a class="btn btn-primary col-5 col-sm-3 "  [routerLink]="[ '/menuPrincipal/insertarCiudades']"  >Nuevo</a>
+    
+    </div>
+
+    <div class="table-responsive mt-4    container" style="height: 505px;">
+        <table class="table table-bordered w-75 ms-auto me-auto table-sm text-center" style="min-width: 500px;">
+            <thead class="bg-dark text-white " >
+                <tr>
+                    <td  style="width: 6%;">#</td>
+                    <td style="width: 70% ;">Ciudad</td>
+                    <td style="width: 70% ;">Provincia</td>
+                    <td  style=" width: 1%; min-width : 111px !important; max-width:111px !important;">Opciones</td>
+
+        
+                </tr>
+            </thead>
+            <tbody >
+                <tr *ngFor="let item of ciudadesList    ; let i=index;" class="text-dark webkit-scrollbar," class="text-dark">
+                    <td><strong>{{i+1}}</strong></td>
+                    <td>{{item.nombre}}</td>
+                    <td>{{item.provincia.nombre}}</td>
+          
+
+            
+
+                    <td class="text-center">
+
+
+                        <div class="btn-group" provincia="group" aria-label="Button group with nested dropdown">
+
+
+
+                            <div class="btn-group" provincia="group">
+                                <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    Opciones
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                    <li><a class="dropdown-item"   [routerLink]="['/menuPrincipal/editarCiudades/',item.idProvincia]" >Editar</a></li>
+                                    <li><button   class="btn"  (click)="eliminar(item.idProvincia)">Eliminar</button></li>
+                                </ul>
+                            </div>
+                        </div>
+
+
+                     
+                    </td>
+                    
+                    
+                </tr>
+                
+
+                
+                <tr><td *ngIf="ciudadesList.length==0" class='text-center' colspan='10'>No existe Registro   </td> </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+
+
+
+</html>
+

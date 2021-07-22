@@ -1,0 +1,27 @@
+@import '~ngx-toastr/toastr';
+
+
+.borde-rojo{
+    /* color: red !important;
+    background-color: red !important; */
+    border: 1px solid #DC3545;
+    border-radius: 4px;
+}
+
+.borde-{
+    /* color: red !important;
+    background-color: red !important; */
+    border: 1px solid #0D6EFD;
+    border-radius: 4px;
+}
+
+@media print{
+    nav{
+        display: none;
+    }
+
+}
+
+
+
+  

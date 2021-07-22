@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+
+
+<body class="container">
+  
+  
+    <div class="   card shadow-lg  mt-5 col-sm-10 col-md-8 col-lg-5 col-xl-5  " style="margin-left: auto;margin-right: auto">
+
+        <div class="card-body">
+        <h3 class="text-center" *ngIf="!IdSucursal">Nueva Sucursal</h3>
+        <h3 class="text-center" *ngIf="IdSucursal">Editar Sucursal</h3>
+
+        <form novalidate (ngSubmit)="guardar(this.sucursalesForm.value)" [formGroup]="sucursalesForm">
+     
+
+            <div class="form-group pb-2 ">
+                
+
+                <label for="exampleInputEmail1" class=" text-black-50 fw-bold fst-italic">Nombre</label>
+                <input formControlName="nombre"
+                    [class.is-invalid]="sucursalesForm.get('nombre')!.touched && sucursalesForm.get('nombre')?.invalid"
+                    [class.border-primary]="sucursalesForm.get('nombre')!.touched && sucursalesForm.get('nombre')?.valid"
+                    type="text" class="form-control    " aria-describedby="emailHelp"
+                    placeholder="Ingrese nombre">
+
+            </div>
+            <div class="form-group pb-2">
+                
+
+                <label for="exampleInputEmail1" class=" text-black-50 fw-bold fst-italic">Direccion</label>
+                <input formControlName="direccion"
+                    [class.is-invalid]="sucursalesForm.get('direccion')!.touched && sucursalesForm.get('direccion')?.invalid"
+                    [class.border-primary]="sucursalesForm.get('direccion')!.touched && sucursalesForm.get('direccion')?.valid"
+                    type="text" class="form-control    "  aria-describedby="emailHelp"
+                    placeholder="Ingrese direccion">
+
+            </div>
+            <div class="form-group pb-2 ">
+                
+
+                <label for="exampleInputEmail1" class=" text-black-50 fw-bold fst-italic">Telefono</label>
+                <input formControlName="telefono"
+                    [class.is-invalid]="sucursalesForm.get('telefono')!.touched && sucursalesForm.get('telefono')?.invalid"
+                    [class.border-primary]="sucursalesForm.get('telefono')!.touched && sucursalesForm.get('telefono')?.valid"
+                    type="number" class="form-control "  aria-describedby="emailHelp"
+                    placeholder="Ingrese telefono">
+
+            </div>
+            <div class="form-group pb-2 ">
+                
+
+                <label for="exampleInputEmail1" class=" text-black-50 fw-bold fst-italic">Celular</label>
+                <input formControlName="celular"
+                    [class.is-invalid]="sucursalesForm.get('celular')!.touched && sucursalesForm.get('celular')?.invalid"
+                    [class.border-primary]="sucursalesForm.get('celular')!.touched && sucursalesForm.get('celular')?.valid"
+                    type="number" class="form-control    " aria-describedby="emailHelp"
+                    placeholder="Ingrese celular">
+
+            </div>
+            <div class="form-group mt-3 pb-3S ">
+                
+                
+                <select formControlName="idCiudad"
+                [class.border-danger]="sucursalesForm.get('idCiudad')!.touched && sucursalesForm.get('idCiudad')?.invalid"
+                [class.border-primary]="sucursalesForm.get('idCiudad')!.touched && sucursalesForm.get('idCiudad')?.valid"
+                type="text" class="form-select ">
+                <option value="" disabled>--Seleccione Ciudad--</option>
+                <option *ngFor=" let item of ciudadList" value="{{item.idCiudad}}">{{item.nombre}}</option>
+                </select>
+
+            </div>
+
+
+<hr>
+        
+        <div class="text-center mt-3">
+            <div class="form-group">
+                <div class="row">
+                    
+                </div>
+                <button type="submit" class="btn btn-primary col-sm  col-sm-4" >Guardar</button>
+                <button (click)="navegar()" class="btn btn-secondary  col-sm col-sm-4  m-3" >Cancelar</button>
+              </div>
+        </div>
+        </form>
+    </div>
+             
+    </div>
+
+
+</body>
+
+
+</html>
+
